@@ -1,7 +1,8 @@
 {
   "name": "todostore",
   "description": "",
-  "main": ["src/store.js","src/storeAsync.js"],
+  "main": [
+     "src/store.js","src/storeAsync.js","src/storeAjax.js","src/storePromise.js"],
   "license": "ISC",
   "homepage": "",
   "ignore": [
