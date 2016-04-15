@@ -31,7 +31,7 @@
   TodoStore.prototype.update = function(todo) {
     // ES6: Array.find
     var todos = this.getAll();
-    var ix = indexOf(todos,todo);
+    var ix = indexOf(todos,function(t) { return todo.id === t.id; });
     if( ix !== -1 ) {
       todos[ix] = todo;
       localStorage.todos = JSON.stringify(todos);
@@ -45,7 +45,7 @@
   TodoStore.prototype.delete = function(todo) {
     // Lodash: _.remove
     var todos = this.getAll();
-    var ix = indexOf(todos,todo);
+    var ix = indexOf(todos,function(t) { return todo.id === t.id; });
     if( ix !== -1 ) {
       todos.splice(ix,1);
       localStorage.todos = JSON.stringify(todos);
@@ -56,11 +56,13 @@
   };
 
   function indexOf(array, predicate) {
-      var ix = -1;
       for (var i = 0; i < array.length; i++) {
-        predicate(array[i]) && ix = i;
+        if( predicate(array[i]) )
+        {
+          return i;
+        }
       }
-      return ix;
+      return -1;
   }
 
   app.factory('todoStore', function() {
